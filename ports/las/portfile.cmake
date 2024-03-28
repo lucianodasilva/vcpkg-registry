@@ -28,8 +28,8 @@
 
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
-    REF 15b2f794288efa911ce1efc26d00392b52043b00
-    SHA512 ed97ca97a79b35c401221e30a410236a0f37424f67f7f44b722a1dc68cb15163e48c88adc8340af3e2a8d74d7025853fcd74e837ba7517ea949b428460e5f036
+    REF d685b26625b3b68e2c1796ddc86d8b376f6aa342
+    SHA512 48271489a6d5ea36dbcccf0c682ea7090268848bfa17e7c57826833f71a0a8ebcad727b8f7715a2aac91deb9df637b0f4025eabbcb6cf343e5bdfdaf00a5f91f
     REPO lucianodasilva/las
  )
 
@@ -60,6 +60,8 @@ vcpkg_install_cmake ()
 
 # Remove duplicate headers
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
+file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/share")
+
 
 # Copy license file
 vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")
