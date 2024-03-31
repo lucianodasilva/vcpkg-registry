@@ -26,37 +26,35 @@
 #   VCPKG_TARGET_STATIC_LIBRARY_SUFFIX
 #   VCPKG_TARGET_SHARED_LIBRARY_SUFFIX
 
-vcpkg_from_github(
-    OUT_SOURCE_PATH SOURCE_PATH
-    REF d685b26625b3b68e2c1796ddc86d8b376f6aa342
-    SHA512 48271489a6d5ea36dbcccf0c682ea7090268848bfa17e7c57826833f71a0a8ebcad727b8f7715a2aac91deb9df637b0f4025eabbcb6cf343e5bdfdaf00a5f91f
-    REPO lucianodasilva/las
- )
+if (EXISTS $ENV{LAS_LOCAL_PATH})
+    message(STATUS "[las]   using local path")
+    set(SOURCE_PATH $ENV{LAS_LOCAL_PATH})
+else()
+    message(STATUS "[las]   using github")
+    vcpkg_from_github(
+        OUT_SOURCE_PATH SOURCE_PATH
+        REF 2c5846aac51d47e90c478a9b5957d70799fc7ec0
+        SHA512 bc55fd2be397437b25a778e0f1ec90b31ee86e0042fb7f4a30a8917aee9696b46e0287f90eb9ef89487ac29ef92a38dd9a01b87407145e4b5b7eaeb4630e4317
+        REPO lucianodasilva/las)
 
- #vcpkg_from_git(
- #   URL "/work/c39/las.git"
- #   OUT_SOURCE_PATH SOURCE_PATH
- #   REF 5dbb39a7d41ed18fe8b715b71d2ac1d98b815553
-    #SHA512 f6bdc1950c4d67623847c89e4004dea0071447953982ce308c8c3033392c3d72b8a6419d732661a1ca82705c6f34f8d4ea33e2ee4ded52280a7d0b0fbd57bce2
-    #REPO lucianodasilva/las
-    #)
+endif()
 
-
-# # Check if one or more features are a part of a package installation.
-# # See /docs/maintainers/vcpkg_check_features.md for more details
+# Check if one or more features are a part of a package installation.
+# See /docs/maintainers/vcpkg_check_features.md for more details
 vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS
   FEATURES
-    test BUILD_TESTS
-)
+    test BUILD_TESTS)
 
 vcpkg_configure_cmake (
     SOURCE_PATH "${SOURCE_PATH}"
-    # OPTIONS -DUSE_THIS_IN_ALL_BUILDS=1 -DUSE_THIS_TOO=2
-    # OPTIONS_RELEASE -DOPTIMIZE=1
-    # OPTIONS_DEBUG -DDEBUGGABLE=1
-)
+    PREFER_NINJA)
 
 vcpkg_install_cmake ()
+
+# merge cmake config files
+vcpkg_cmake_config_fixup(
+    PACKAGE_NAME ${PORT}
+    CONFIG_PATH "share/${PORT}")
 
 # Remove duplicate headers
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
@@ -65,3 +63,6 @@ file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/share")
 
 # Copy license file
 vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")
+
+# Copy usage file
+file(INSTALL "${CMAKE_CURRENT_LIST_DIR}/usage" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")
