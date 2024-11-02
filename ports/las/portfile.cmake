@@ -33,8 +33,8 @@ else()
     message(STATUS "[las]   using github")
     vcpkg_from_github(
         OUT_SOURCE_PATH SOURCE_PATH
-        REF e89abb67bb5d81f89eabeb8ec3e9617f9e3a22a0
-        SHA512 66904cdd05ddb90667bcf00989b58a52c297ba0e48a5df019ca2d3921643de40b76d1b03fa62f82f49318cf837fbf0112a614853293493aab10d5094274814b4
+        REF d7eaf69b71c0ee912bbccd17ab227d1d0116a5ca
+        SHA512 36d98ad8956b4240c1efbcea983516d433d2c9104fea95d315380376d77169a8f28bbe33770f9ebc28f1ced395d35fd36464af0687c69e6921daae82866b8997
         REPO lucianodasilva/las)
 endif()
 
