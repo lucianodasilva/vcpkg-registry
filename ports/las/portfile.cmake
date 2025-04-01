@@ -33,8 +33,8 @@ else()
     message(STATUS "[las]   using github")
     vcpkg_from_github(
         OUT_SOURCE_PATH SOURCE_PATH
-        REF bfe83c38a041633462c7b8f5cfd304640600b281
-        SHA512 3cbf4c6a6a41830659e596e202ee2d915f28ed31aaf8a108b8232156bf012d2ed0f3a0dcff8aaf3f6e4c8610cf1322f784b7617133d38917e32902784b04d6a3
+        REF 01f6496d6ad725a85b38bab4d0eb6d44b65c24a2
+        SHA512 e71b330a2dd0c65398fe4af8603aff31bb226cc5df043ac452829259d9778eb9072aeff1af5d3bda6697b3d627dcf52f61494aaa9c82fef9872c78a3b376cbaa
         REPO lucianodasilva/las)
 endif()
 
@@ -42,7 +42,8 @@ endif()
 # See /docs/maintainers/vcpkg_check_features.md for more details
 vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS
   FEATURES
-    test BUILD_TESTS)
+    test BUILD_TESTS
+    batch BUILD_BATCH)
 
 vcpkg_configure_cmake (
     SOURCE_PATH "${SOURCE_PATH}"
