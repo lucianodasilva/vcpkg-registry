@@ -11,20 +11,20 @@
     }
   ],
   "features": {
-    "test": {
-      "description": "With unit tests",
-      "dependencies": [
-        {
-          "name": "catch2",
-          "host": true
-        }
-      ]
-    },
     "batch": {
       "description": "Tool for monitoring and reporting long running tests",
       "dependencies": [
         {
           "name": "cxxopts",
+          "host": true
+        }
+      ]
+    },
+    "test": {
+      "description": "With unit tests",
+      "dependencies": [
+        {
+          "name": "catch2",
           "host": true
         }
       ]
