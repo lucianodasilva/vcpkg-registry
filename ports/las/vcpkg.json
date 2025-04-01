@@ -1,6 +1,6 @@
 {
   "name": "las",
-  "version": "0.3",
+  "version": "0.4",
   "description": "Bundle of common tools and idioms",
   "homepage": "https://github.com/lucianodasilva/las",
   "license": "MIT",
@@ -16,6 +16,15 @@
       "dependencies": [
         {
           "name": "catch2",
+          "host": true
+        }
+      ]
+    },
+    "batch": {
+      "description": "Tool for monitoring and reporting long running tests",
+      "dependencies": [
+        {
+          "name": "cxxopts",
           "host": true
         }
       ]
