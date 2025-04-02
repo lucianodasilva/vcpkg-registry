@@ -27,14 +27,14 @@
 #   VCPKG_TARGET_SHARED_LIBRARY_SUFFIX
 
 if (EXISTS $ENV{LAS_LOCAL_PATH})
-    message(STATUS "[las]   using local path")
+    message(STATUS "[las] using local path")
     set(SOURCE_PATH $ENV{LAS_LOCAL_PATH})
 else()
-    message(STATUS "[las]   using github")
+    message(STATUS "[las] using github")
     vcpkg_from_github(
         OUT_SOURCE_PATH SOURCE_PATH
-        REF 01f6496d6ad725a85b38bab4d0eb6d44b65c24a2
-        SHA512 e71b330a2dd0c65398fe4af8603aff31bb226cc5df043ac452829259d9778eb9072aeff1af5d3bda6697b3d627dcf52f61494aaa9c82fef9872c78a3b376cbaa
+        REF d5061056a3c2121a05debfa49d7434f49636c199
+        SHA512 ba8dd26ca8dabe67a650e370f35ed6a84a6878df99d2469a9f1c9ff6a188223203855d00a5343da3bc6dfe4e7c0c492bcd790a7fe99e49768ff9db46672ce286
         REPO lucianodasilva/las)
 endif()
 
@@ -47,9 +47,18 @@ vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS
 
 vcpkg_configure_cmake (
     SOURCE_PATH "${SOURCE_PATH}"
-    PREFER_NINJA)
+    PREFER_NINJA
+    OPTIONS 
+        ${FEATURE_OPTIONS})
 
 vcpkg_install_cmake ()
+
+if (BUILD_BATCH)
+    vcpkg_copy_tools (
+        TOOL_NAMES las-batch
+        AUTO_CLEAN)
+endif()
+
 
 # merge cmake config files
 vcpkg_cmake_config_fixup(
